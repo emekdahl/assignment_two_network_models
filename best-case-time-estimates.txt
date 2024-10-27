@@ -1,0 +1,43 @@
+from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpStatus, value
+
+{
+    "tasks": {
+        "A": {"name": "Describe product", "expected_duration": 20, "predecessors": []},
+        "B": {"name": "Develop marketing strategy", "expected_duration": 20, "predecessors": []},
+        "C": {"name": "Design brochure", "expected_duration": 40, "predecessors": ["A"]},
+        "D1": {"name": "Requirements analysis", "expected_duration": 60, "predecessors": ["A"]},
+        "D2": {"name": "Software design", "expected_duration": 80, "predecessors": ["D1"]},
+        "D3": {"name": "System design", "expected_duration": 80, "predecessors": ["D1"]},
+        "D4": {"name": "Coding", "expected_duration": 200, "predecessors": ["D2", "D3"]},
+        "D5": {"name": "Write documentation", "expected_duration": 10, "predecessors": ["D4"]},
+        "D6": {"name": "Unit testing", "expected_duration": 20, "predecessors": ["D4"]},
+        "D7": {"name": "System testing", "expected_duration": 20, "predecessors": ["D6"]},
+        "D8": {"name": "Package deliverables", "expected_duration": 10, "predecessors": ["D5", "D7"]},
+        "E": {"name": "Survey potential market", "expected_duration": 60, "predecessors": ["B", "C"]},
+        "F": {"name": "Develop pricing plan", "expected_duration": 40, "predecessors": ["D8", "E"]},
+        "G": {"name": "Develop implementation plan", "expected_duration": 20, "predecessors": ["A", "D8"]},
+        "H": {"name": "Write client proposal", "expected_duration": 20, "predecessors": ["F", "G"]}
+    }
+}
+
+lp_problem = LpProblem("Restaurant_Recommendation_System_Project_Plan", LpMinimize)
+
+start_times = {task_id: LpVariable(f"start_{task_id}", lowBound=0, cat="Continuous") for task_id in tasks}
+
+T = LpVariable("Total_Project_Time", lowBound=0, cat="Continuous")
+
+lp_problem += T, "Minimize_Total_Project_Duration"
+
+
+for task_id, task_info in tasks.items():
+    lp_problem += start_times[task_id] + task_info['expected_duration'] <= T, f"Completion_{task_id}"
+
+    for predecessor in task_info['predecessors']:
+        lp_problem += start_times[task_id] >= start_times[predecessor] + tasks[predecessor]['expected_duration'], f"Precedence_{predecessor}_before_{task_id}"
+
+lp_problem.solve()
+
+print(f"Status: {LpStatus[lp_problem.status]}")
+print(f"Total Project Duration: {value(T)} hours")
+for task_id, var in start_times.items():
+    print(f"Start time of '{tasks[task_id]['name']}': {value(var)} hours")
