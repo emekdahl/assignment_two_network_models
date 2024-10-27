@@ -1,0 +1,88 @@
+from pulp import LpProblem, LpMinimize, LpVariable, LpStatus, value
+
+task_durations = {
+    'best': {
+        'A': 20, 'B': 20, 'C': 40, 'D1': 60, 'D2': 80, 'D3': 80, 'D4': 200, 'D5': 10,
+        'D6': 20, 'D7': 20, 'D8': 10, 'E': 60, 'F': 40, 'G': 20, 'H': 20
+    },
+    'expected': {
+        'A': 30, 'B': 40, 'C': 60, 'D1': 80, 'D2': 120, 'D3': 120, 'D4': 300, 'D5': 20,
+        'D6': 30, 'D7': 30, 'D8': 15, 'E': 90, 'F': 60, 'G': 30, 'H': 70
+    },
+    'worst': {
+        'A': 40, 'B': 60, 'C': 80, 'D1': 100, 'D2': 160, 'D3': 160, 'D4': 400, 'D5': 40,
+        'D6': 40, 'D7': 40, 'D8': 20, 'E': 120, 'F': 80, 'G': 40, 'H': 100
+    }
+}
+
+dependencies = {
+    'A': [], 'B': [], 'C': ['A'], 'D1': ['A'], 'D2': ['D1'], 'D3': ['D1'],
+    'D4': ['D2', 'D3'], 'D5': ['D4'], 'D6': ['D4'], 'D7': ['D6'], 
+    'D8': ['D5', 'D7'], 'E': ['B', 'C'], 'F': ['D8', 'E'], 
+    'G': ['A', 'D8'], 'H': ['F', 'G']
+}
+
+def solve_project_plan(scenario):
+    durations = task_durations[scenario]
+
+    lp_problem = LpProblem(f"Project_Scheduling_{scenario.capitalize()}", LpMinimize)
+
+    start_times = {task_id: LpVariable(f"start_{task_id}", lowBound=0, cat="Continuous") for task_id in durations}
+
+    T = LpVariable("Total_Project_Time", lowBound=0, cat="Continuous")
+
+    lp_problem += T, f"Minimize_Total_Project_Duration_{scenario.capitalize()}"
+
+    for task_id, duration in durations.items():
+        lp_problem += start_times[task_id] + duration <= T, f"Completion_{task_id}_{scenario.capitalize()}"
+
+        for predecessor in dependencies[task_id]:
+            lp_problem += start_times[task_id] >= start_times[predecessor] + durations[predecessor], f"Precedence_{predecessor}_before_{task_id}_{scenario.capitalize()}"
+
+    lp_problem.solve()
+
+    lp_status = LpStatus[lp_problem.status]
+    total_duration = value(T)
+    task_start_times = {task_id: value(var) for task_id, var in start_times.items()}
+
+    return lp_status, total_duration, task_start_times
+
+best_case_result = solve_project_plan('best')
+expected_case_result = solve_project_plan('expected')
+worst_case_result = solve_project_plan('worst')
+
+print("Best Case Scenario:", best_case_result)
+print("Expected Case Scenario:", expected_case_result)
+print("Worst Case Scenario:", worst_case_result)
+
+task_descriptions = {
+    'A': 'Describe product',
+    'B': 'Develop marketing strategy',
+    'C': 'Design brochure',
+    'D1': 'Requirements analysis',
+    'D2': 'Software design',
+    'D3': 'System design',
+    'D4': 'Coding',
+    'D5': 'Write documentation',
+    'D6': 'Unit testing',
+    'D7': 'System testing',
+    'D8': 'Package deliverables',
+    'E': 'Survey potential market',
+    'F': 'Develop pricing plan',
+    'G': 'Develop implementation plan',
+    'H': 'Write client proposal'
+}
+
+def print_labeled_results(scenario, result):
+    lp_status, total_duration, task_start_times = result
+    print(f"\n{scenario.capitalize()} Case Scenario:")
+    print(f"Status: {lp_status}")
+    print(f"Total Project Duration: {total_duration} hours")
+    print("Task Start Times:")
+    for task_id, start_time in task_start_times.items():
+        task_name = task_descriptions.get(task_id, "Unknown Task")
+        print(f"  - {task_name} (Task {task_id}): Starts at {start_time} hours")
+
+print_labeled_results('Best', best_case_result)
+print_labeled_results('Expected', expected_case_result)
+print_labeled_results('Worst', worst_case_result)

@@ -1,0 +1,129 @@
+Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /usr/local/python/3.12.1/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/5fa0a4da07304346bd69f9477cd85a20-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /tmp/5fa0a4da07304346bd69f9477cd85a20-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 39 COLUMNS
+At line 109 RHS
+At line 144 BOUNDS
+At line 145 ENDATA
+Problem MODEL has 34 rows, 16 columns and 68 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 0 (-34) rows, 0 (-16) columns and 0 (-68) elements
+Empty problem - 0 rows, 0 columns and 0 elements
+Optimal - objective value 470
+After Postsolve, objective 470, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 470 - 0 iterations time 0.002, Presolve 0.00
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /usr/local/python/3.12.1/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/0a0231f1796044ec8997aa4092699975-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /tmp/0a0231f1796044ec8997aa4092699975-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 39 COLUMNS
+At line 109 RHS
+At line 144 BOUNDS
+At line 145 ENDATA
+Problem MODEL has 34 rows, 16 columns and 68 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 0 (-34) rows, 0 (-16) columns and 0 (-68) elements
+Empty problem - 0 rows, 0 columns and 0 elements
+Optimal - objective value 735
+After Postsolve, objective 735, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 735 - 0 iterations time 0.002, Presolve 0.00
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /usr/local/python/3.12.1/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/434b1993eea344409d12dc6ab78d832d-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /tmp/434b1993eea344409d12dc6ab78d832d-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 39 COLUMNS
+At line 109 RHS
+At line 144 BOUNDS
+At line 145 ENDATA
+Problem MODEL has 34 rows, 16 columns and 68 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 0 (-34) rows, 0 (-16) columns and 0 (-68) elements
+Empty problem - 0 rows, 0 columns and 0 elements
+Optimal - objective value 980
+After Postsolve, objective 980, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 980 - 0 iterations time 0.002, Presolve 0.00
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Best Case Scenario: ('Optimal', 470.0, {'A': 0.0, 'B': 0.0, 'C': 20.0, 'D1': 20.0, 'D2': 80.0, 'D3': 80.0, 'D4': 160.0, 'D5': 360.0, 'D6': 360.0, 'D7': 380.0, 'D8': 400.0, 'E': 60.0, 'F': 410.0, 'G': 410.0, 'H': 450.0})
+Expected Case Scenario: ('Optimal', 735.0, {'A': 0.0, 'B': 0.0, 'C': 30.0, 'D1': 30.0, 'D2': 110.0, 'D3': 110.0, 'D4': 230.0, 'D5': 530.0, 'D6': 530.0, 'D7': 560.0, 'D8': 590.0, 'E': 90.0, 'F': 605.0, 'G': 605.0, 'H': 665.0})
+Worst Case Scenario: ('Optimal', 980.0, {'A': 0.0, 'B': 0.0, 'C': 40.0, 'D1': 40.0, 'D2': 140.0, 'D3': 140.0, 'D4': 300.0, 'D5': 700.0, 'D6': 700.0, 'D7': 740.0, 'D8': 780.0, 'E': 120.0, 'F': 800.0, 'G': 800.0, 'H': 880.0})
+
+Best Case Scenario:
+Status: Optimal
+Total Project Duration: 470.0 hours
+Task Start Times:
+  - Describe product (Task A): Starts at 0.0 hours
+  - Develop marketing strategy (Task B): Starts at 0.0 hours
+  - Design brochure (Task C): Starts at 20.0 hours
+  - Requirements analysis (Task D1): Starts at 20.0 hours
+  - Software design (Task D2): Starts at 80.0 hours
+  - System design (Task D3): Starts at 80.0 hours
+  - Coding (Task D4): Starts at 160.0 hours
+  - Write documentation (Task D5): Starts at 360.0 hours
+  - Unit testing (Task D6): Starts at 360.0 hours
+  - System testing (Task D7): Starts at 380.0 hours
+  - Package deliverables (Task D8): Starts at 400.0 hours
+  - Survey potential market (Task E): Starts at 60.0 hours
+  - Develop pricing plan (Task F): Starts at 410.0 hours
+  - Develop implementation plan (Task G): Starts at 410.0 hours
+  - Write client proposal (Task H): Starts at 450.0 hours
+
+Expected Case Scenario:
+Status: Optimal
+Total Project Duration: 735.0 hours
+Task Start Times:
+  - Describe product (Task A): Starts at 0.0 hours
+  - Develop marketing strategy (Task B): Starts at 0.0 hours
+  - Design brochure (Task C): Starts at 30.0 hours
+  - Requirements analysis (Task D1): Starts at 30.0 hours
+  - Software design (Task D2): Starts at 110.0 hours
+  - System design (Task D3): Starts at 110.0 hours
+  - Coding (Task D4): Starts at 230.0 hours
+  - Write documentation (Task D5): Starts at 530.0 hours
+  - Unit testing (Task D6): Starts at 530.0 hours
+  - System testing (Task D7): Starts at 560.0 hours
+  - Package deliverables (Task D8): Starts at 590.0 hours
+  - Survey potential market (Task E): Starts at 90.0 hours
+  - Develop pricing plan (Task F): Starts at 605.0 hours
+  - Develop implementation plan (Task G): Starts at 605.0 hours
+  - Write client proposal (Task H): Starts at 665.0 hours
+
+Worst Case Scenario:
+Status: Optimal
+Total Project Duration: 980.0 hours
+Task Start Times:
+  - Describe product (Task A): Starts at 0.0 hours
+  - Develop marketing strategy (Task B): Starts at 0.0 hours
+  - Design brochure (Task C): Starts at 40.0 hours
+  - Requirements analysis (Task D1): Starts at 40.0 hours
+  - Software design (Task D2): Starts at 140.0 hours
+  - System design (Task D3): Starts at 140.0 hours
+  - Coding (Task D4): Starts at 300.0 hours
+  - Write documentation (Task D5): Starts at 700.0 hours
+  - Unit testing (Task D6): Starts at 700.0 hours
+  - System testing (Task D7): Starts at 740.0 hours
+  - Package deliverables (Task D8): Starts at 780.0 hours
+  - Survey potential market (Task E): Starts at 120.0 hours
+  - Develop pricing plan (Task F): Starts at 800.0 hours
+  - Develop implementation plan (Task G): Starts at 800.0 hours
+  - Write client proposal (Task H): Starts at 880.0 hours
